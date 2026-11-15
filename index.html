@@ -76,7 +76,7 @@
   <canvas id="graph" width="544" height="240"></canvas>
   <div class="row">
     <span><span class="dot" style="background:#7fd4ff"></span>전자(−) &nbsp; <span style="color:#ffd84a">▶</span> 전류</span>
-    <span>전류 <b>13.6 mA</b> (어디서나 같음)</span>
+    <span>전류 <b>약 13.6 mA</b> (어디서나 같음)</span>
   </div>
 </div>
 
@@ -97,7 +97,7 @@
 </div>
 
 <div id="tip"></div>
-<div id="note">이해를 돕기 위해 전자의 움직임을 과장해 표현했습니다. 실제 전자는 1초에 1mm도 움직이지 않습니다.</div>
+<div id="note">이해를 돕기 위해 전자의 움직임을 과장해 표현했습니다. 실제 전자는 1초에 1mm도 움직이지 않습니다. 전압·전류 수치는 계산하기 쉬운 근삿값입니다.</div>
 
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
@@ -666,7 +666,7 @@ jumper('wireBlack', '검은 점퍼선 (GND)', '브레드보드 5번 줄과 GND �
 
 // ───────────────────────── 저항 ─────────────────────────
 const resistor = part('resistor', '저항 220Ω',
-  '전류가 흐르기 어렵게 막는 부품. 전자가 속의 원자와 부딪히며 에너지를 열로 내놓아 3.0V가 떨어집니다.', [2, 9, 7]);
+  '전류가 흐르기 어렵게 막는 부품. 전자가 속의 원자와 부딪히며 에너지를 열로 내놓아 약 3V가 떨어집니다.', [2, 9, 7]);
 rod(resistor, [X10, CY - 0.4, ZA], [X10, 4.2, ZA], 0.12, M(0xcfd3d6, { metal: 0.85, r: 0.3, see: 0.3, volt: 5 }));
 rod(resistor, [X10, 4.2, ZA], [11.7, 4.2, ZA], 0.12, M(0xcfd3d6, { metal: 0.85, r: 0.3, see: 0.3, volt: 5 }));
 rod(resistor, [9.3, 4.2, ZA], [X6, 4.2, ZA], 0.12, M(0xcfd3d6, { metal: 0.85, r: 0.3, see: 0.3, volt: 2 }));
@@ -691,7 +691,7 @@ resistor.add(atoms);
 
 // ───────────────────────── LED ─────────────────────────
 const led = part('led', '빨간 LED',
-  '전류가 한 방향(긴 다리 → 짧은 다리)으로만 흐르는 부품. 전기 에너지를 빛으로 바꾸며 약 2.0V가 떨어집니다.', [-2, 9, -4]);
+  '전류가 한 방향(긴 다리 → 짧은 다리)으로만 흐르는 부품. 전기 에너지를 빛으로 바꾸며 약 2V가 떨어집니다.', [-2, 9, -4]);
 rod(led, [X6, CY - 0.4, ZE], [X6, 8.6, ZE], 0.12, M(0xcfd3d6, { metal: 0.85, r: 0.3, see: 0.3, volt: 2 }),
   { n: 'LED 긴 다리 (+)', d: '애노드. 전류가 들어가는 쪽이며 전위는 2V입니다.' });
 rod(led, [X5, CY - 0.4, ZE], [X5, 8.6, ZE], 0.12, M(0xcfd3d6, { metal: 0.85, r: 0.3, see: 0.3, volt: 0 }),
@@ -815,11 +815,11 @@ tag('브레드보드 덮개', '', [26, 3.6, -4], parts.cover, isExp);
 tag('내부 금속 클립', '', [18, 3.2, 4], parts.bbBase, isExp);
 tag('5V', 'v5', [-2, 6.3, 15.5], null, isVolt);
 tag('5V', 'v5', [14.2, 3.6, 4.5], null, isVolt);
-tag('2V', 'v2', [9.6, 3.6, 3.6], null, isVolt);
+tag('약 2V', 'v2', [9.6, 3.6, 3.6], null, isVolt);
 tag('0V', 'v0', [6.2, 3.6, 3.6], null, isVolt);
 tag('0V', 'v0', [-6, 6.3, 12.8], null, isVolt);
-tag('저항에서 3.0V 강하', 'drop', [10.5, 6.0, ZA], null, isVolt);
-tag('LED에서 2.0V 강하', 'drop', [8, 10.9, ZE], null, isVolt);
+tag('저항에서 약 3V 강하', 'drop', [10.5, 6.0, ZA], null, isVolt);
+tag('LED에서 약 2V 강하', 'drop', [8, 10.9, ZE], null, isVolt);
 
 function updateTags() {
   const w = window.innerWidth, h = window.innerHeight;
@@ -873,8 +873,8 @@ function drawGraph() {
     g2.beginPath(); g2.moveTo(X(pts[i][0]), Y(pts[i][1])); g2.lineTo(X(pts[i + 1][0]), Y(pts[i + 1][1])); g2.stroke();
   }
   g2.fillStyle = '#ffe45c'; g2.textAlign = 'left';
-  g2.fillText('−3.0V', X(0.37), Y(3.9));
-  g2.fillText('−2.0V', X(0.67), Y(1.4));
+  g2.fillText('약 −3V', X(0.37), Y(3.9));
+  g2.fillText('약 −2V', X(0.67), Y(1.4));
   // 전류를 따라 움직이는 점
   if (state.flow !== 'none' && !state.explode) {
     const u = graphX(state.flow === 'trace' ? offT : offA);
@@ -898,11 +898,11 @@ const STEPS = [
     ...CAM_ALL, see: false, flow: 'current', volt: false },
   { t: '전자의 이동', d: '실제로 움직이는 것은 (−)전하를 띤 전자입니다. 전자는 전류와 반대로 GND에서 5V 쪽으로 이동합니다.',
     cam: [5, 26, 36], tgt: [5, 2, 7], see: true, flow: 'both', volt: false },
-  { t: '저항에서의 전압강하', d: '전자가 저항 속 원자와 부딪히며 에너지를 열로 내놓습니다. 그래서 저항 양쪽의 전위가 5V와 2V로 3.0V 차이 납니다. 전자의 개수는 줄지 않습니다.',
+  { t: '저항에서의 전압강하', d: '전자가 저항 속 원자와 부딪히며 에너지를 열로 내놓습니다. 그래서 저항 양쪽의 전위가 5V와 약 2V로, 약 3V 차이 납니다. 전자의 개수는 줄지 않습니다.',
     cam: [10.5, 12, 18.5], tgt: [10.5, 3.6, 5.5], see: true, flow: 'electron', volt: true },
-  { t: 'LED에서의 전압강하', d: '남은 2.0V만큼의 에너지는 LED에서 빛으로 바뀝니다. LED를 지나면 전위는 0V가 됩니다.',
+  { t: 'LED에서의 전압강하', d: '남은 약 2V만큼의 에너지는 LED에서 빛으로 바뀝니다. LED를 지나면 전위는 0V가 됩니다.',
     cam: [15, 12, 16], tgt: [8, 6.5, 3], see: true, flow: 'electron', volt: true },
-  { t: '정리', d: '저항 3.0V + LED 2.0V = 전원 5V. 전압강하를 모두 더하면 전원 전압과 같습니다. 전류는 회로 어디서나 13.6mA로 같습니다.',
+  { t: '정리', d: '저항 약 3V + LED 약 2V = 전원 5V. 부품마다 값은 조금씩 달라도 전압강하의 합은 항상 전원 전압과 같습니다. 전류는 회로 어디서나 약 13.6mA로 같습니다.',
     ...CAM_ALL, see: false, flow: 'current', volt: true },
 ];
 
